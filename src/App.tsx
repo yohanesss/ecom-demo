@@ -1,18 +1,29 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import LayoutContainer from "./features/Layout/LayoutContainer";
+import { Route, Routes } from "react-router-dom";
+import { routes } from "./routes/Route";
+import { AuthRouterWrapper } from "./utils/components/AuthRouterWrapper";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      </header>
-    </div>
+    <LayoutContainer>
+      <Routes>
+        {routes.map((route) => (
+          <Route
+            path={route.path}
+            element={
+              // route.protected ? (
+              //   <AuthRouterWrapper>{route.element}</AuthRouterWrapper>
+              // ) : (
+              route.element
+              // )
+            }
+          />
+        ))}
+      </Routes>
+    </LayoutContainer>
   );
 }
 
